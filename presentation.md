@@ -847,22 +847,22 @@ foo :: f a b c d e
 
 ---
 
-# `!`
+# `Effect`
 ### The name for the category of *sets of effects*.
 
 ```haskell
-foreign import data DOM :: !
+foreign import data DOM :: Effect
 ```
 
 ---
 
-# `# !`
+# `# Effect`
 ### The name for the category of *rows of effects*.
 
 ```haskell
 -- Supply a row of effects and a type,
 -- and get back another type:
-foreign import data Eff :: # ! -> * -> *
+foreign import data Eff :: # Effect -> * -> *
 
 trace :: forall r. String -> Eff (trace :: Trace | r) Unit
 ```
@@ -891,7 +891,6 @@ foreign import data jQuery :: *
 
 # FP Toolbox
 ### Stuff you couldn't escape even if you wanted to.
-
 
 ---
 
@@ -1276,4 +1275,3 @@ runGame g = ...
 
 # THANK YOU!
 ### John A. De Goes — @jdegoes
-### (Do I owe you a coffee?)
