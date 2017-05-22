@@ -1,0 +1,6 @@
+.DS_Store
+.psc-ide-port
+game.js
+bower_components/
+node_modules/
+output/
