@@ -646,9 +646,9 @@ boostStrength :: Int -> (CharacterStats -> CharacterStats)
 ```haskell
 data Map4x4 a =
   Map4x4 a a a a
-	       a a a a
-		     a a a a
-		     a a a a
+         a a a a
+         a a a a
+         a a a a
 
 boolMap4x4 :: Map4x4 Boolean =
   Map4x4 true  true  false true
@@ -742,7 +742,7 @@ gimmeX p = p.x
 
 gimmeX {x: 1, y: 2, z: 3} -- 1 - works!
 
--- gimmeX {x: 1, z: 3}    -- Invalid, no x!
+-- gimmeX {x: 1, z: 3}    -- Invalid, no y!
 ```
 
 ---
@@ -1011,7 +1011,7 @@ gameMap =
 public interface Appendable<A> {
   public A append(A a1, A a2);
 }
-class AppendableInt extends Appendable<Integer> {
+class AppendableInt implements Appendable<Integer> {
   public Integer append(Integer a1, Integer a2) {
     return a1 + a2;
   }
