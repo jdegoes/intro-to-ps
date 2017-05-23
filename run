@@ -1,3 +1,2 @@
 #!/bin/sh
-pulp build --to game.js
-open game.html
+pulp build --to game.js && open game.html
