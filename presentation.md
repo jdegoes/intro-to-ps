@@ -221,8 +221,8 @@ strengthOf :: CharacterStats -> Int
 
 ```haskell
 data NPC =
-  Ogre String Loc Number |
-  Wolf String Loc Number
+  Ogre String Loc Int |
+  Wolf String Loc Int
 ```
 
 [^2]: They get their name from an easy way you can use to compute the size of these sets (hint: sum = addition).
@@ -237,8 +237,8 @@ data NPC =
 --     |
 --     |
   data NPC =
-    Ogre String Loc Number |
-    Wolf String Loc Number
+    Ogre String Loc Int |
+    Wolf String Loc Int
 ```
 
 ---
@@ -247,8 +247,8 @@ data NPC =
 
 ```haskell
   data NPC =
-    Ogre String Loc Number |
-    Wolf String Loc Number
+    Ogre String Loc Int |
+    Wolf String Loc Int
 --   |
 --   |
 -- Data constructor.  
@@ -259,8 +259,8 @@ data NPC =
 
 ```haskell
   data NPC =
-    Ogre String Loc Number |
-    Wolf String Loc Number
+    Ogre String Loc Int |
+    Wolf String Loc Int
 --          |    |    |
 --           \   |   /
 --             \ | /
@@ -283,8 +283,8 @@ nameOf (Wolf name _ _) = name
 
 ```haskell
 data NPC =
-  Ogre String Loc Number |
-  Wolf String Loc Number
+  Ogre String Loc Int |
+  Wolf String Loc Int
 
 nameOf :: NPC -> String
 nameOf npc = case npc of
@@ -318,8 +318,8 @@ monsterStrength :: Monster -> Int
 
 ```haskell
 data NPC =
-  Ogre {name :: String, loc :: Loc, health :: Number} |
-  Wolf {name :: String, loc :: Loc, health :: Number}
+  Ogre {name :: String, loc :: Loc, health :: Int} |
+  Wolf {name :: String, loc :: Loc, health :: Int}
 ```
 
 [^5]: Record types are represented using native Javascript objects.
@@ -329,12 +329,12 @@ data NPC =
 
 ```haskell
   data NPC =
-    Ogre {name :: String, loc :: Loc, health :: Number} |
-    Wolf {name :: String, loc :: Loc, health :: Number}
---       |                                            |
---       \----------------------|---------------------/
---                              |
---                         Record type.
+    Ogre {name :: String, loc :: Loc, health :: Int} |
+    Wolf {name :: String, loc :: Loc, health :: Int}
+--       |                                         |
+--       \--------------------|--------------------/
+--                            |
+--                       Record type.
 ```
 
 ---
@@ -343,12 +343,12 @@ data NPC =
 
 ```haskell
   data NPC =
-    Ogre {name :: String, loc :: Loc, health :: Number} |
-    Wolf {name :: String, loc :: Loc, health :: Number}
---        |                                          |
---        \--------------------|---------------------/
---                             |
---                      A 'row' of types.  
+    Ogre {name :: String, loc :: Loc, health :: Int} |
+    Wolf {name :: String, loc :: Loc, health :: Int}
+--        |                                       |
+--        \-------------------|-------------------/
+--                            |
+--                    A 'row' of types.
 ```
 
 ---
@@ -357,8 +357,8 @@ data NPC =
 
 ```haskell
   data NPC =
-    Ogre {name :: String, loc :: Loc, health :: Number} |
-    Wolf {name :: String, loc :: Loc, health :: Number}
+    Ogre {name :: String, loc :: Loc, health :: Int} |
+    Wolf {name :: String, loc :: Loc, health :: Int}
 --         |
 --      A label.
 ```
@@ -369,8 +369,8 @@ data NPC =
 
 ```haskell
   data NPC =
-    Ogre {name :: String, loc :: Loc, health :: Number} |
-    Wolf {name :: String, loc :: Loc, health :: Number}
+    Ogre {name :: String, loc :: Loc, health :: Int} |
+    Wolf {name :: String, loc :: Loc, health :: Int}
 --                  |
 --        The type of the label.
 ```
@@ -381,7 +381,7 @@ data NPC =
 ### Construction / deconstruction.
 
 ```haskell
-makeWolf :: String -> Loc -> Number -> NPC
+makeWolf :: String -> Loc -> Int -> NPC
 makeWolf name loc health = Wolf {name: name, loc: loc, health: health}
 
 nameOf :: NPC -> String
@@ -488,7 +488,7 @@ var fave = monster => ...
 
 ```haskell
 type CharData =
-  {name :: String, loc :: Loc, health :: Number}
+  {name :: String, loc :: Loc, health :: Int}
 
 data NPC = Ogre CharData | Wolf CharData
 ```
@@ -500,7 +500,7 @@ data NPC = Ogre CharData | Wolf CharData
 
 
 ```haskell
-newtype Health = Health Number
+newtype Health = Health Int
 
 dead :: Health
 dead = Health 0
@@ -512,7 +512,7 @@ dead = Health 0
 ### Deconstruction / pattern matching.
 
 ```haskell
-newtype Health = Health Number
+newtype Health = Health Int
 
 isAlive :: Health -> Boolean
 isAlive (Health v) = v > 0
@@ -564,7 +564,7 @@ matchesEvil "evil" -- true
 ### "Multi-parameter" functions.[^6]
 
 ```haskell
-damageNpc :: Number -> (NPC -> NPC)
+damageNpc :: Int -> (NPC -> NPC)
 damageNpc damage = \npc -> ...
 ```
 
@@ -601,22 +601,22 @@ f :: a -> b -> c -> d -> e
 ### MORE functions that return functions.
 
 ```haskell
-damageNpc :: Number -> (NPC -> NPC)
+damageNpc :: Int -> (NPC -> NPC)
 damageNpc = \damage -> \npc -> ...
 ```
 
 ```haskell
-damageNpc :: Number -> (NPC -> NPC)
+damageNpc :: Int -> (NPC -> NPC)
 damageNpc = \damage npc -> ...
 ```
 
 ```haskell
-damageNpc :: Number -> (NPC -> NPC)
+damageNpc :: Int -> (NPC -> NPC)
 damageNpc damage = \npc -> ...
 ```
 
 ```haskell
-damageNpc :: Number -> (NPC -> NPC)
+damageNpc :: Int -> (NPC -> NPC)
 damageNpc damage npc = ...
 ```
 
@@ -646,9 +646,9 @@ boostStrength :: Int -> (CharacterStats -> CharacterStats)
 ```haskell
 data Map4x4 a =
   Map4x4 a a a a
-	       a a a a
-		     a a a a
-		     a a a a
+         a a a a
+         a a a a
+         a a a a
 
 boolMap4x4 :: Map4x4 Boolean =
   Map4x4 true  true  false true
@@ -723,7 +723,7 @@ isEmpty :: ???
 ### Like duck typing only better.
 
 ```haskell
-type Point r = { x :: Number, y :: Number | r }
+type Point r = { x :: Int, y :: Int | r }
 ```
 
 ---
@@ -732,17 +732,17 @@ type Point r = { x :: Number, y :: Number | r }
 ### Like duck typing only better.
 
 ```haskell
-type Point r = { x :: Number, y :: Number | r }
---         |                              |
---         |                              |
---    'remainder'        syntax that means "the rest of the row"
+type Point r = { x :: Int, y :: Int | r }
+--         |                        |
+--         |                        |
+--    'remainder'     syntax that means "the rest of the row"
 
-gimmeX :: forall r. Point r -> Number
+gimmeX :: forall r. Point r -> Int
 gimmeX p = p.x
 
 gimmeX {x: 1, y: 2, z: 3} -- 1 - works!
 
--- gimmeX {x: 1, z: 3}    -- Invalid, no x!
+-- gimmeX {x: 1, z: 3}    -- Invalid, no y!
 ```
 
 ---
@@ -800,7 +800,7 @@ data List a = Nil | Cons a (List a)
 
 
 ```haskell
-addOne :: Number -> Number
+addOne :: Int -> Int
 addOne n = n + 1
 
 result = addOne 1
@@ -954,7 +954,7 @@ type Player =
 ### Native Javascript arrays.
 
 ```haskell
-[1, 2, 3] :: Array Number
+[1, 2, 3] :: Array Int
 ```
 
 ---
@@ -1011,13 +1011,13 @@ gameMap =
 public interface Appendable<A> {
   public A append(A a1, A a2);
 }
-class AppendableNumber extends Appendable<Float> {
-  public Float append(Float a1, Float a2) {
+class AppendableInt implements Appendable<Integer> {
+  public Integer append(Integer a1, Integer a2) {
     return a1 + a2;
   }
 }
-Appendable<Float> appendableNumber = new AppendableNumber();
-appendableNumber.append(1, 2); // 3!
+Appendable<Integer> appendableInt = new AppendableInt();
+appendableInt.append(1, 2); // 3!
 ```
 
 ---
@@ -1050,7 +1050,7 @@ boolAppendable.append(true, false); // false!
 class Appendable a where
   append :: a -> a -> a
 
-instance appendableNumber :: Appendable Number where
+instance appendableInt :: Appendable Int where
   append a1 a2 = a1 + a2
 
 append 1 2 -- 3!
@@ -1062,7 +1062,7 @@ append 1 2 -- 3!
 ### Turbocharged polymorphism.
 
 ```haskell
-repeat :: forall a. (Appendable a) => Number -> a -> a
+repeat :: forall a. (Appendable a) => Int -> a -> a
 repeat 0 a = a
 repeat n a = append (repeat (n - 1) a) a
 
@@ -1240,9 +1240,9 @@ class Evitacilppa f where
   pa :: forall a b. f (a -> b) -> f a -> f b
 ```
 
-1. You are given `f Number` and `Number`, for some `Evitacilppa f`. If you have a function:
+1. You are given `f Int` and `Int`, for some `Evitacilppa f`. If you have a function:
 
-   `add :: Number -> Number -> Number`
+   `add :: Int -> Int -> Int`
 
    which "rewrite rules" do you need to use so that you can apply the `add` function to the two numbers?
 
